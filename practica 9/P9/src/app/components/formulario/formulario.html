@@ -1,23 +1,58 @@
 <div class="container mt-4">
-  <h2>Agregar Alumno</h2>
-
+  <h2>Registrar Nuevo Alumno</h2>
+  
   <form #formAlumno="ngForm" (ngSubmit)="guardarAlumno(formAlumno)">
     
     <div class="mb-3">
-      <label>Nombre:</label>
-      <input type="text" class="form-control" name="nombre" ngModel required>
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" ngModel required minlength="3" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" #nombre="ngModel" placeholder="Ej: Josue Alexis" [ngClass]="{'is-invalid': nombre.invalid && nombre.touched}">
+      
+      <div class="invalid-feedback" *ngIf="nombre.invalid && nombre.touched">
+        <div *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</div>
+        <div *ngIf="nombre.errors?.['pattern']">El nombre solo puede contener letras y espacios.</div>
+        <div *ngIf="nombre.errors?.['minlength']">El nombre debe tener al menos 4 letras.</div>
+      </div>
     </div>
 
     <div class="mb-3">
-      <label>Edad:</label>
-      <input type="number" class="form-control" name="edad" ngModel required>
+      <label for="edad" class="form-label">Edad:</label>
+      <input type="number" class="form-control" id="edad" name="edad" ngModel required min="17" max="30" #edad="ngModel" placeholder="Ej: 20" [ngClass]="{'is-invalid': edad.invalid && edad.touched}">
+      
+      <div class="invalid-feedback" *ngIf="edad.invalid && edad.touched">
+        <div *ngIf="edad.errors?.['required']">La edad es obligatoria.</div>
+        <div *ngIf="edad.errors?.['min']">La edad mínima para universidad es 17 años.</div>
+        <div *ngIf="edad.errors?.['max']">La edad máxima permitida es 30 años.</div>
+      </div>
     </div>
 
     <div class="mb-3">
-      <label>Carrera:</label>
-      <input type="text" class="form-control" name="carrera" ngModel required>
+      <label for="carrera" class="form-label">Carrera:</label>
+      <input type="text" class="form-control" id="carrera" name="carrera" ngModel required minlength="5" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" #carrera="ngModel" placeholder="Ej: Tecnologías de la Información" [ngClass]="{'is-invalid': carrera.invalid && carrera.touched}">
+      
+      <div class="invalid-feedback" *ngIf="carrera.invalid && carrera.touched">
+        <div *ngIf="carrera.errors?.['required']">La carrera es obligatoria.</div>
+        <div *ngIf="carrera.errors?.['pattern']">La carrera solo puede contener letras y espacios.</div>
+        <div *ngIf="carrera.errors?.['minlength']">La carrera debe tener al menos 5 letras.</div>
+      </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="formAlumno.invalid">Guardar Alumno</button>
+    <a href="/consulta" class="btn btn-secondary ms-2">Ver Lista de Alumnos</a>
   </form>
+</div>
+
+<div class="modal" tabindex="-1" [ngClass]="{'show d-block': mostrarModal}" [style.backgroundColor]="mostrarModal ? 'rgba(0,0,0,0.5)' : 'transparent'" style="transition: all 0.3s ease;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">¡Registro Exitoso!</h5>
+      </div>
+      <div class="modal-body">
+        <p>El alumno ha sido guardado correctamente en MongoDB.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="cerrarModal()">Aceptar y Ver Lista</button>
+      </div>
+    </div>
+  </div>
 </div>
