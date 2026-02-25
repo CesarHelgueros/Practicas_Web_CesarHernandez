@@ -2,12 +2,17 @@
 
 <div class="cards">
   <div class="card" *ngFor="let game of games">
-<img [src]="getImagen(game.nombre)" class="imagen">
+
+    <img 
+      [src]="getImagen(game.nombre)" 
+      class="imagen"
+      alt="Portada"
+    >
 
     <h3>{{ game.nombre }}</h3>
 
     <p><strong>Género:</strong> {{ game.genero }}</p>
-
     <p><strong>Precio:</strong> ${{ game.precio }}</p>
+
   </div>
 </div>
