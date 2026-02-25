@@ -15,9 +15,30 @@ export class Home implements OnInit {
 
   constructor(private gameService: Game) {}
 
-  ngOnInit() {
-    this.gameService.getGames().subscribe(data => {
+  ngOnInit(): void {
+    this.gameService.getGames().subscribe((data: any) => {
       this.games = data;
     });
   }
+
+  getImagen(nombre: string): string {
+
+    const n = nombre.toLowerCase();
+
+    if (n.includes('god')) {
+      return 'assets/images/godofwar.jpg';
+    }
+
+    if (n.includes('zelda')) {
+      return 'assets/images/zelda.jpg';
+    }
+
+    if (n.includes('mew')) {
+      return 'assets/images/mewgenics.jpg';
+    }
+
+    return 'assets/images/godofwar.jpg';
+  }
+
 }
+

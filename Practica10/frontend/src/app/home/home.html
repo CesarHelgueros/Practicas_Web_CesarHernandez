@@ -2,7 +2,7 @@
 
 <div class="cards">
   <div class="card" *ngFor="let game of games">
-    <img src="https://via.placeholder.com/300x180" alt="imagen">
+<img [src]="getImagen(game.nombre)" class="imagen">
 
     <h3>{{ game.nombre }}</h3>
 
