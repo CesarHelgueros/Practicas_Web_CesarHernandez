@@ -1,0 +1,70 @@
+<div class="container mt-4">
+
+  <h3>Actualizar videojuegos</h3>
+
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Genero</th>
+        <th>Precio</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let game of games">
+        <td>{{game.nombre}}</td>
+        <td>{{game.genero}}</td>
+        <td>${{game.precio}}</td>
+        <td>
+          <button class="btn btn-warning btn-sm"
+                  (click)="selectGame(game)">
+            Actualizar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="selectedGame" class="card p-3 shadow mt-4">
+
+    <h4>Editar videojuego</h4>
+
+    <form (ngSubmit)="updateGame()">
+
+      <input class="form-control mb-2"
+             [(ngModel)]="selectedGame.nombre"
+             name="nombre"
+             required>
+
+      <input class="form-control mb-2"
+             [(ngModel)]="selectedGame.genero"
+             name="genero"
+             required>
+
+      <input type="number"
+             class="form-control mb-2"
+             [(ngModel)]="selectedGame.precio"
+             name="precio"
+             required>
+
+      <input class="form-control mb-2"
+             [(ngModel)]="selectedGame.imagenUrl"
+             name="imagenUrl">
+
+      <button class="btn btn-success me-2">
+        Guardar
+      </button>
+
+      <button type="button"
+              class="btn btn-secondary"
+              (click)="cancelEdit()">
+        Cancelar
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

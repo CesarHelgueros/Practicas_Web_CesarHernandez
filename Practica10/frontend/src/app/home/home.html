@@ -1,0 +1,13 @@
+<h2 class="titulo">Lista de Videojuegos</h2>
+
+<div class="cards">
+  <div class="card" *ngFor="let game of games">
+    <img src="https://via.placeholder.com/300x180" alt="imagen">
+
+    <h3>{{ game.nombre }}</h3>
+
+    <p><strong>Género:</strong> {{ game.genero }}</p>
+
+    <p><strong>Precio:</strong> ${{ game.precio }}</p>
+  </div>
+</div>

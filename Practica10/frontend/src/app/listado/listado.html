@@ -1,0 +1,30 @@
+<div class="container mt-4">
+
+  <h3>Lista de videojuegos</h3>
+
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Genero</th>
+        <th>Precio</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let game of games">
+        <td>{{game.nombre}}</td>
+        <td>{{game.genero}}</td>
+        <td>${{game.precio}}</td>
+        <td>
+          <button class="btn btn-danger btn-sm"
+                  (click)="deleteGame(game._id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
