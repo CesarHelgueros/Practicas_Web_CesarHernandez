@@ -5,6 +5,7 @@
   <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
+        <th>Imagen</th> <!-- 👈 NUEVA COLUMNA -->
         <th>Nombre</th>
         <th>Genero</th>
         <th>Precio</th>
@@ -14,6 +15,12 @@
 
     <tbody>
       <tr *ngFor="let game of games">
+        
+        <!-- 👇 AQUÍ SE MUESTRA LA IMAGEN -->
+        <td>
+          <img [src]="game.imagen" width="100">
+        </td>
+
         <td>{{game.nombre}}</td>
         <td>{{game.genero}}</td>
         <td>${{game.precio}}</td>
@@ -23,6 +30,7 @@
             Eliminar
           </button>
         </td>
+
       </tr>
     </tbody>
 

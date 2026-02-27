@@ -1,53 +1,55 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Game } from '../services/game';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [FormsModule],
-  template: `
-    <h2>Agregar Videojuego</h2>
-    <form (ngSubmit)="agregar()">
-
-      <input 
-        [(ngModel)]="game.nombre" 
-        name="nombre" 
-        placeholder="Nombre" 
-        required>
-
-      <input 
-        [(ngModel)]="game.genero" 
-        name="genero" 
-        placeholder="Género" 
-        required>
-
-      <input 
-        [(ngModel)]="game.precio" 
-        name="precio" 
-        placeholder="Precio" 
-        required
-        type="number">
-
-      <button type="submit">Guardar</button>
-
-    </form>
-  `
+  imports: [CommonModule, FormsModule],
+  templateUrl: './formulario.html',
+  styleUrl: './formulario.css'
 })
 export class Formulario {
-
   game = {
-    nombre: '',
-    genero: '',
-    precio: ''
+    nombre: "",
+    genero: "",
+    precio: 0,
+    imagenUrl: ""
   };
+
+  showSuccessModal: boolean = false;
+  showErrorModal: boolean = false;
 
   constructor(private gameService: Game) {}
 
-  agregar() {
-    this.gameService.createGame(this.game).subscribe(() => {
-      alert('Videojuego agregado correctamente');
-      this.game = { nombre: '', genero: '', precio: '' };
+  onSubmit() {
+    this.gameService.createGame(this.game).subscribe({
+      next: (response: any) => {
+        console.log("Videojuego capturado:", this.game);
+        
+        this.showSuccessModal = true; 
+        
+        this.game = {
+          nombre: "",
+          genero: "",
+          precio: 0,
+          imagenUrl: ""
+        };
+      },
+      error: (error: any) => {
+        console.error("Error al guardar:", error);
+        
+        this.showErrorModal = true; 
+      }
     });
+  }
+
+  closeSuccessModal() {
+    this.showSuccessModal = false;
+  }
+
+  closeErrorModal() {
+    this.showErrorModal = false;
   }
 }

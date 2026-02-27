@@ -19,6 +19,11 @@ import { RouterOutlet, RouterLink } from '@angular/router';
     <div class="container">
       <router-outlet></router-outlet>
     </div>
+
+    <footer class="footer">
+      <p>© 2026 Videojuegos Time | Todos los derechos reservados</p>
+      <p>Desarrollado por César Helgueros</p>
+    </footer>
   `
 })
 export class AppComponent {}

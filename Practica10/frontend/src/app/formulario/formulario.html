@@ -1,1 +1,67 @@
-<p>formulario works!</p>
+<div class="form-container container mt-4 mb-5">
+  <h2 class="mb-4 text-dark"><i class="bi bi-plus-circle"></i> Agregar Videojuego</h2>
+  
+  <form (ngSubmit)="onSubmit()" #gameForm="ngForm" class="shadow-sm p-4 bg-white rounded border">
+    
+    <div class="mb-3">
+      <label for="nombre" class="form-label fw-bold">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" placeholder="Ej. The Legend of Zelda" name="nombre" [(ngModel)]="game.nombre" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="genero" class="form-label fw-bold">Género:</label>
+      <input type="text" class="form-control" id="genero" placeholder="Ej. Aventura" name="genero" [(ngModel)]="game.genero" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="precio" class="form-label fw-bold">Precio ($):</label>
+      <input type="number" class="form-control" id="precio" placeholder="1200" name="precio" [(ngModel)]="game.precio" required>
+    </div>
+    
+    <div class="mb-4">
+      <label for="imagenUrl" class="form-label fw-bold">Ruta de la Imagen:</label>
+      <input type="text" class="form-control" id="imagenUrl" placeholder="Ej. /img/portada.jpg" name="imagenUrl" [(ngModel)]="game.imagenUrl" required>
+    </div>
+    
+    <button type="submit" [disabled]="gameForm.invalid" class="btn btn-primary px-4 py-2">
+      <i class="bi bi-save"></i> Guardar Videojuego
+    </button>
+    
+  </form>
+</div>
+
+<div class="modal" tabindex="-1" [ngStyle]="{'display': showSuccessModal ? 'block' : 'none', 'background-color': 'rgba(0,0,0,0.6)'}">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-success">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title"><i class="bi bi-check-circle"></i> ¡Éxito!</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeSuccessModal()"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <h4 class="text-success mb-3">¡Juego Agregado!</h4>
+        <p class="text-dark">El videojuego se guardó correctamente en tu base de datos y ya está visible en el catálogo.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success px-4" (click)="closeSuccessModal()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" [ngStyle]="{'display': showErrorModal ? 'block' : 'none', 'background-color': 'rgba(0,0,0,0.6)'}">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title"><i class="bi bi-x-circle"></i> Ocurrió un problema</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeErrorModal()"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <h4 class="text-danger mb-3">Error de Conexión</h4>
+        <p class="text-dark">No se pudo conectar con Flask o la base de datos de MongoDB. Revisa tu terminal.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger px-4" (click)="closeErrorModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
